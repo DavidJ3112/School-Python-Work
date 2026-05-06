@@ -5,7 +5,7 @@ numbers = []
 # Random number generation and added to list
 for i in range(10):
     numbers.append(random.randint(0, 100))
-#print(numbers)
+# print(numbers)
 
 for n in range(10):
     print(f"current number is {numbers[n]}")

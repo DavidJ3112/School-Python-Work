@@ -1,7 +1,7 @@
 import random
 
 # Variable construction
-number = random.randint(0, 100)
+number = round(random.uniform(0.0, 100.0), 1)
 guess = 0
 
 # quick awnser
@@ -11,16 +11,16 @@ def Guesing():
     while True:
         guess = input("Please enter your guess: ")
         try:
-            return int(guess)
-        except:
+            return round(float(guess), 1)
+        except ValueError:
             print("NAN")
 
 guess = Guesing()
 while True:
-    if guess < number:
+    if guess > number:
         print("Lower")
         guess = Guesing()
-    elif guess > number:
+    elif guess < number:
         print("Higher")
         guess = Guesing()
     else:
