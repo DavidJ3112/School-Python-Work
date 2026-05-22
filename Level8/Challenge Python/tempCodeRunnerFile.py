@@ -1,0 +1,1 @@
+self.frame.winfo_exists
