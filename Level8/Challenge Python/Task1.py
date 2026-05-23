@@ -1,13 +1,13 @@
+# from general_scripts.init import *
 import tkinter as tk
 import time
 
-import os, sys
+import os
+import sys
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.abspath(os.path.join(current_dir, "..", ".."))
 sys.path.append(parent_dir)
-
-from general_scripts.init import *
 
 
 class ClockApp:
@@ -18,11 +18,9 @@ class ClockApp:
 
         self.current_view = None
 
-        ## Menu
         self.menu_frame = tk.Frame(self.Window)
         self.menu_frame.pack(pady=10)
 
-        ## Menu Buttons
         tk.Button(self.menu_frame, text="Clock", command=self.show_clock).pack(
             side="left", padx=10
         )
@@ -33,7 +31,6 @@ class ClockApp:
             side="left", padx=10
         )
 
-        ## Content area — sub-views pack into this frame
         self.content_frame = tk.Frame(self.Window)
         self.content_frame.pack(fill="both", expand=True)
 
@@ -55,7 +52,7 @@ class ClockApp:
 
     def show_alarm(self):
         self.clear_view()
-        # Alarm not yet implemented
+        self.current_view = self.Alarm(self.content_frame)
 
     class StopWatch:
         def __init__(self, frame):
@@ -122,18 +119,114 @@ class ClockApp:
             current_date = time.strftime("%Y-%m-%d", time.localtime())
             current_time = time.strftime("%H:%M:%S", time.localtime())
 
-            self.time_label.config(
-                text=f"Date: {current_date}\nTime: {current_time}"
-            )
+            self.time_label.config(text=f"Date: {current_date}\nTime: {current_time}")
 
             self.frame.after(500, self.tick)
 
     class Alarm:
         def __init__(self, frame):
             self.frame = frame
-            tk.Label(self.frame, text="Alarm — coming soon", font=("Arial", 18)).pack(
-                pady=80
+
+            self.alarm_time = None
+
+            title = tk.Label(self.frame, text="Alarm Clock", font=("Arial", 24))
+            title.pack(pady=20)
+
+            self.clock_label = tk.Label(self.frame, text="", font=("Arial", 28))
+            self.clock_label.pack(pady=20)
+
+            selector_frame = tk.Frame(self.frame)
+            selector_frame.pack(pady=20)
+
+            self.hour_var = tk.StringVar(value="00")
+            self.minute_var = tk.StringVar(value="00")
+            self.second_var = tk.StringVar(value="00")
+
+            self.hour_spin = tk.Spinbox(
+                selector_frame,
+                from_=0,
+                to=23,
+                wrap=True,
+                width=3,
+                font=("Arial", 18),
+                textvariable=self.hour_var,
+                format="%02.0f",
             )
+            self.hour_spin.pack(side="left")
+
+            tk.Label(selector_frame, text=":", font=("Arial", 18)).pack(side="left")
+
+            self.minute_spin = tk.Spinbox(
+                selector_frame,
+                from_=0,
+                to=59,
+                wrap=True,
+                width=3,
+                font=("Arial", 18),
+                textvariable=self.minute_var,
+                format="%02.0f",
+            )
+            self.minute_spin.pack(side="left")
+
+            tk.Label(selector_frame, text=":", font=("Arial", 18)).pack(side="left")
+
+            self.second_spin = tk.Spinbox(
+                selector_frame,
+                from_=0,
+                to=59,
+                wrap=True,
+                width=3,
+                font=("Arial", 18),
+                textvariable=self.second_var,
+                format="%02.0f",
+            )
+            self.second_spin.pack(side="left")
+
+            button_frame = tk.Frame(self.frame)
+            button_frame.pack(pady=20)
+
+            tk.Button(button_frame, text="Set Alarm", command=self.set_alarm).pack(
+                side="left", padx=5
+            )
+
+            tk.Button(button_frame, text="Clear Alarm", command=self.clear_alarm).pack(
+                side="left", padx=5
+            )
+
+            self.status_label = tk.Label(
+                self.frame, text="No alarm set", font=("Arial", 16)
+            )
+            self.status_label.pack(pady=20)
+
+            self.tick()
+
+        def set_alarm(self):
+            self.alarm_time = (
+                f"{self.hour_var.get()}:{self.minute_var.get()}:{self.second_var.get()}"
+            )
+
+            self.status_label.config(text=f"Alarm set for {self.alarm_time}")
+
+        def clear_alarm(self):
+            self.alarm_time = None
+            self.status_label.config(text="Alarm cleared")
+
+        def tick(self):
+            if not self.frame.winfo_exists():
+                return
+
+            current_time = time.strftime("%H:%M:%S")
+
+            self.clock_label.config(text=current_time)
+
+            if self.alarm_time == current_time:
+                self.status_label.config(text="⏰ ALARM ⏰")
+
+                self.frame.bell()
+
+                self.alarm_time = None
+
+            self.frame.after(500, self.tick)
 
 
 if __name__ == "__main__":
