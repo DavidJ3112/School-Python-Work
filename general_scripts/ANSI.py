@@ -4,12 +4,12 @@ import shutil
 class ANSI:
     """A collection of ANSI escape sequences for terminal styling and control."""
 
-    #!^ ── Main ───────────────────────────────────────────────────────────────
+    #!# ── Main ───────────────────────────────────────────────────────────────
     RESET           = "\033[0m"
     NEW_LINE        = "\n"
     SAPERATOR       = "─" * shutil.get_terminal_size().columns
 
-    #!^ ── Text styles ────────────────────────────────────────────────────────
+    #!# ── Text styles ────────────────────────────────────────────────────────
     BOLD            = "\033[1m"
     DIM             = "\033[2m"
     ITALIC          = "\033[3m"
@@ -20,7 +20,7 @@ class ANSI:
     HIDDEN          = "\033[8m"
     STRIKE          = "\033[9m"
 
-    #!^ ── Foreground (text) colors ───────────────────────────────────────────
+    #!# ── Foreground (text) colors ───────────────────────────────────────────
     BLACK           = "\033[30m"
     RED             = "\033[31m"
     GREEN           = "\033[32m"
@@ -31,7 +31,7 @@ class ANSI:
     WHITE           = "\033[37m"
     DEFAULT_FG      = "\033[39m"
 
-    #!^ ── Bright variants ────────────────────────────────────────────────────
+    #!# ── Bright variants ────────────────────────────────────────────────────
     BRIGHT_BLACK    = "\033[90m"
     BRIGHT_RED      = "\033[91m"
     BRIGHT_GREEN    = "\033[92m"
@@ -41,7 +41,7 @@ class ANSI:
     BRIGHT_CYAN     = "\033[96m"
     BRIGHT_WHITE    = "\033[97m"
 
-    #!^ ── Background colors ──────────────────────────────────────────────────
+    #!# ── Background colors ──────────────────────────────────────────────────
     BG_BLACK         = "\033[40m"
     BG_RED           = "\033[41m"
     BG_GREEN         = "\033[42m"
@@ -52,7 +52,7 @@ class ANSI:
     BG_WHITE         = "\033[47m"
     DEFAULT_BG       = "\033[49m"
 
-    #!^ ── Bright background variants ────────────────────────────────────────
+    #!# ── Bright background variants ────────────────────────────────────────
     BG_BRIGHT_BLACK   = "\033[100m"
     BG_BRIGHT_RED     = "\033[101m"
     BG_BRIGHT_GREEN   = "\033[102m"
@@ -62,42 +62,42 @@ class ANSI:
     BG_BRIGHT_CYAN    = "\033[106m"
     BG_BRIGHT_WHITE   = "\033[107m"
 
-    #!^ ── Cursor movement ────────────────────────────────────────────────────
-    CURSOR_UP           = "\033[A"      ## Move up 1 line
-    CURSOR_DOWN         = "\033[B"      ## Move down 1 line
-    CURSOR_RIGHT        = "\033[C"      ## Move right 1 column
-    CURSOR_LEFT         = "\033[D"      ## Move left 1 column
-    CURSOR_HOME         = "\033[H"      ## Move to top-left (0, 0)
-    CURSOR_LINE_START   = "\033[G"      ## Move to start of current line (col 1)
-    CURSOR_LINE_END     = "\033[999C"   ## Move to end of current line (far right)
-    CURSOR_SAVE         = "\033[s"      ## Save cursor position
-    CURSOR_RESTORE      = "\033[u"      ## Restore saved cursor position
-    CURSOR_HIDE         = "\033[?25l"   ## Hide the cursor
-    CURSOR_SHOW         = "\033[?25h"   ## Show the cursor
+    #!# ── Cursor movement ────────────────────────────────────────────────────
+    CURSOR_UP           = "\033[A"
+    CURSOR_DOWN         = "\033[B"
+    CURSOR_RIGHT        = "\033[C"
+    CURSOR_LEFT         = "\033[D"
+    CURSOR_HOME         = "\033[H"
+    CURSOR_LINE_START   = "\033[G"
+    CURSOR_LINE_END     = "\033[999C"
+    CURSOR_SAVE         = "\033[s"
+    CURSOR_RESTORE      = "\033[u"
+    CURSOR_HIDE         = "\033[?25l"
+    CURSOR_SHOW         = "\033[?25h"
 
-    #!^ ── Line control ───────────────────────────────────────────────────────
-    LINE_UP             = "\033[F"  ## Move to start of previous line
-    LINE_DOWN           = "\033[E"  ## Move to start of next line
-    ERASE_LINE          = "\033[2K" ## Erase entire current line
-    ERASE_LINE_END      = "\033[0K" ## Erase from cursor to end of line
-    ERASE_LINE_START    = "\033[1K" ## Erase from cursor to start of line
-    CARRIAGE_RETURN     = "\r"      ## Move to start of current line (no erase)
+    #!# ── Line control ───────────────────────────────────────────────────────
+    LINE_UP             = "\033[F"
+    LINE_DOWN           = "\033[E"
+    ERASE_LINE          = "\033[2K"
+    ERASE_LINE_END      = "\033[0K"
+    ERASE_LINE_START    = "\033[1K"
+    CARRIAGE_RETURN     = "\r"
 
-    #!^ ── Screen control ─────────────────────────────────────────────────────
-    CLEAR_SCREEN         = "\033[2J"     ## Clear entire screen
-    CLEAR_SCREEN_END     = "\033[0J"     ## Clear from cursor to end of screen
-    CLEAR_SCREEN_START   = "\033[1J"     ## Clear from cursor to start of screen
-    CLEAR_SCROLLBACK     = "\033[3J"     ## Clear screen + scrollback buffer
-    SCREEN_SAVE          = "\033[?47h"   ## Save screen state
-    SCREEN_RESTORE       = "\033[?47l"   ## Restore saved screen state
-    ALT_SCREEN_ON        = "\033[?1049h" ## Switch to alternate screen buffer
-    ALT_SCREEN_OFF       = "\033[?1049l" ## Switch back from alternate screen buffer
+    #!# ── Screen control ─────────────────────────────────────────────────────
+    CLEAR_SCREEN         = "\033[2J"
+    CLEAR_SCREEN_END     = "\033[0J"
+    CLEAR_SCREEN_START   = "\033[1J"
+    CLEAR_SCROLLBACK     = "\033[3J"
+    SCREEN_SAVE          = "\033[?47h"
+    SCREEN_RESTORE       = "\033[?47l"
+    ALT_SCREEN_ON        = "\033[?1049h"
+    ALT_SCREEN_OFF       = "\033[?1049l"
 
-    #!^ ── Scrolling ──────────────────────────────────────────────────────────
-    SCROLL_UP           = "\033[S"  ## Scroll viewport up 1 line
-    SCROLL_DOWN         = "\033[T"  ## Scroll viewport down 1 line
+    #!# ── Scrolling ──────────────────────────────────────────────────────────
+    SCROLL_UP           = "\033[S"
+    SCROLL_DOWN         = "\033[T"
 
-    #!^ ── Dynamic cursor helpers ─────────────────────────────────────────────
+    #!# ── Dynamic cursor helpers ─────────────────────────────────────────────
     @staticmethod
     def up(n: int = 1) -> str:
         """
@@ -209,7 +209,7 @@ class ANSI:
         """
         return f"\033[{n}G"
 
-    #!^ ── Color helpers ──────────────────────────────────────────────────────
+    #!# ── Color helpers ──────────────────────────────────────────────────────
     @staticmethod
     def rgb(r: int, g: int, b: int) -> str:
         """
@@ -258,7 +258,7 @@ class ANSI:
         """
         return f"\033[48;5;{n}m"
 
-    #!^ ── Text helpers ───────────────────────────────────────────────────────
+    #!# ── Text helpers ───────────────────────────────────────────────────────
     @staticmethod
     def wrap(text: str, *codes: str) -> str:
         """
@@ -295,7 +295,7 @@ class ANSI:
         return f"\033[{n}F\033[2K{text}"
 
 
-#!^ ── Quick demo ─────────────────────────────────────────────────────────────
+#!# ── Quick demo ─────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     import time
 
