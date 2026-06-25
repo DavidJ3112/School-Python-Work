@@ -1,1 +1,1 @@
-self.frame.winfo_exists
+size
