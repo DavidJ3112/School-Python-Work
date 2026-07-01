@@ -11,38 +11,36 @@ class PaintApp:
         self.width = 900
         self.height = 600
 
-        # =========================
-        # STATE
-        # =========================
+        #!# =========================
+        #!# STATE
+        #!# =========================
         self.color = "black"
         self.eraser = False
         self.last_x = None
         self.last_y = None
 
         self.current_stroke = None
-
-        # undo/redo stacks (REAL system)
         self.strokes: list[list[dict]] = []
         self.redo_stack: list[list[dict]] = []
 
-        # =========================
-        # IMAGE MODEL
-        # =========================
+        #!# =========================
+        #!# IMAGE MODEL
+        #!# =========================
         self.image = Image.new("RGB", (self.width, self.height), "white")
         self.draw = ImageDraw.Draw(self.image)
 
-        # =========================
-        # GUI LAYOUT
-        # =========================
-        self.toolbar = tk.Frame(root, bg="#ddd", height=40)
+        #!# =========================
+        #!# GUI LAYOUT
+        #!# =========================
+        self.toolbar = tk.Frame(root, bg="#!#ddd", height=40)
         self.toolbar.pack(side="top", fill="x")
 
         self.canvas = tk.Canvas(root, bg="white", width=self.width, height=self.height)
         self.canvas.pack(fill="both", expand=True)
 
-        # =========================
-        # CONTROLS
-        # =========================
+        #!# =========================
+        #!# CONTROLS
+        #!# =========================
         tk.Button(self.toolbar, text="Color", command=self.pick_color).pack(side="left")
         tk.Button(self.toolbar, text="Eraser", command=self.use_eraser).pack(side="left")
         tk.Button(self.toolbar, text="Undo (Ctrl+Z)", command=self.undo).pack(side="left")
@@ -54,20 +52,20 @@ class PaintApp:
         self.brush.set(5)
         self.brush.pack(side="left")
 
-        # =========================
-        # EVENTS
-        # =========================
+        #!# =========================
+        #!# EVENTS
+        #!# =========================
         self.canvas.bind("<Button-1>", self.start_draw)
         self.canvas.bind("<B1-Motion>", self.draw_motion)
         self.canvas.bind("<ButtonRelease-1>", self.end_draw)
 
-        # hotkeys
+        #!# hotkeys
         self.root.bind("<Control-z>", lambda e: self.undo())
         self.root.bind("<Control-y>", lambda e: self.redo())
 
-    # =========================
-    # TOOLS
-    # =========================
+    #!# =========================
+    #!# TOOLS
+    #!# =========================
     def pick_color(self):
         color = colorchooser.askcolor()[1]
         if color:
@@ -77,9 +75,9 @@ class PaintApp:
     def use_eraser(self):
         self.eraser = True
 
-    # =========================
-    # DRAWING
-    # =========================
+    #!# =========================
+    #!# DRAWING
+    #!# =========================
     def start_draw(self, event):
         self.last_x = event.x
         self.last_y = event.y
@@ -93,7 +91,7 @@ class PaintApp:
         size = int(self.brush.get())
         color = "white" if self.eraser else self.color
 
-        # draw on canvas
+        #!# draw on canvas
         line_id = self.canvas.create_line(
             self.last_x,
             self.last_y,
@@ -105,14 +103,14 @@ class PaintApp:
             smooth=True
         )
 
-        # draw on PIL image
+        #!# draw on PIL image
         self.draw.line(
             (self.last_x, self.last_y, event.x, event.y),
             fill=color,
             width=size
         )
 
-        # store stroke data (not just ids)
+        #!# store stroke data (not just ids)
         if self.current_stroke is not None:
             self.current_stroke.append({
                 "x1": self.last_x,
@@ -134,9 +132,9 @@ class PaintApp:
         self.last_x = None
         self.last_y = None
 
-    # =========================
-    # UNDO / REDO
-    # =========================
+    #!# =========================
+    #!# UNDO / REDO
+    #!# =========================
     def undo(self):
         if not self.strokes:
             return
@@ -170,9 +168,9 @@ class PaintApp:
 
         self.rebuild_image()
 
-    # =========================
-    # IMAGE REBUILD
-    # =========================
+    #!# =========================
+    #!# IMAGE REBUILD
+    #!# =========================
     def rebuild_image(self):
         self.image = Image.new("RGB", (self.width, self.height), "white")
         self.draw = ImageDraw.Draw(self.image)
@@ -186,9 +184,9 @@ class PaintApp:
                 )
 
 
-# =========================
-# RUN
-# =========================
+#!# =========================
+#!# RUN
+#!# =========================
 if __name__ == "__main__":
     root = tk.Tk()
     app = PaintApp(root)

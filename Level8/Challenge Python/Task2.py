@@ -64,7 +64,6 @@ class Calculator:
                 pady=5
             )
 
-        # Large +
         tk.Button(
             self.CalFrame,
             text="+",
@@ -80,7 +79,6 @@ class Calculator:
             sticky="ns"
         )
 
-        # Large =
         tk.Button(
             self.CalFrame,
             text="=",
