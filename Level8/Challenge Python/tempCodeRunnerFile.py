@@ -1,1 +1,1 @@
-size
+self.menu.add_cascade(label="Bestand", menu=file_menu)

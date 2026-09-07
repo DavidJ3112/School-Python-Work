@@ -1,9 +1,8 @@
-# from general_scripts.init import *
+from general_scripts.init import *
 import tkinter as tk
 import time
 
 from general_scripts.init import *
-
 
 class ClockApp:
     def __init__(self) -> None:
@@ -226,3 +225,4 @@ class ClockApp:
 
 if __name__ == "__main__":
     ClockApp()
+    

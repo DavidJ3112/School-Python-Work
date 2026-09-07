@@ -12,12 +12,12 @@ class Calculator:
         self.CalFrame = tk.Frame(self.screen)
         self.CalFrame.pack(pady=20)
 
-        # Calculator state
+        #!# Calculator state
         self.current_value = ""
         self.first_number = None
         self.operator = None
 
-        # Display
+        #!# Display
         self.display_var = tk.StringVar(value="0")
 
         tk.Entry(
@@ -28,7 +28,7 @@ class Calculator:
             width=15
         ).grid(row=0, column=0, columnspan=4, pady=(0, 10))
 
-        # Normal buttons
+        #!# Normal buttons
         buttons = [
             ("C", 1, 0),
             ("/", 1, 1),
@@ -94,7 +94,7 @@ class Calculator:
             sticky="ns"
         )
 
-        # Large 0
+        #!# Large 0
         tk.Button(
             self.CalFrame,
             text="0",
@@ -115,7 +115,7 @@ class Calculator:
     def Click(self, name):
         print(f"Clicked: {name}")
 
-        # Clear
+        #!# Clear
         if name == "C":
             self.current_value = ""
             self.first_number = None
@@ -123,13 +123,13 @@ class Calculator:
             self.display_var.set("0")
             return
 
-        # Number
+        #!# Number
         if name.isdigit():
             self.current_value += name
             self.display_var.set(self.current_value)
             return
-
-        # Decimal point
+        
+        #!# Decimal point
         if name == ".":
             if "." not in self.current_value:
                 if self.current_value == "":
@@ -139,7 +139,7 @@ class Calculator:
                 self.display_var.set(self.current_value)
             return
 
-        # Operator
+        #!# Operator
         if name in ("+", "-", "*", "/"):
             if self.current_value == "":
                 return
@@ -153,7 +153,7 @@ class Calculator:
 
             return
 
-        # Equals
+        #!# Equals
         if name == "=":
             try:
                 if (
@@ -182,7 +182,7 @@ class Calculator:
 
                 self.display_var.set(str(result))
 
-                # Allow continued calculations
+                #!# Allow continued calculations
                 self.current_value = str(result)
                 self.first_number = None
                 self.operator = None

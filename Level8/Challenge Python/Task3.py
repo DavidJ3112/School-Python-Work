@@ -3,7 +3,8 @@ import json
 import os
 import hashlib
 
-FILE = "users.json"
+FILE = r"C:\Git_repos\School-Python-Work\Level8\Challenge Python\task3-users-Normal.json"
+FILEH = r"C:\Git_repos\School-Python-Work\Level8\Challenge Python\task3-users-Hashed.json"
 
 
 #!# =========================================================
@@ -98,10 +99,10 @@ def hash_password(password, salt="static_salt"):
 
 
 def load_users_v3():
-    if not os.path.exists(FILE):
+    if not os.path.exists(FILEH):
         return {}
 
-    with open(FILE, "r") as f:
+    with open(FILEH, "r") as f:
         try:
             return json.load(f)
         except json.JSONDecodeError:
@@ -109,7 +110,7 @@ def load_users_v3():
 
 
 def save_users_v3(users):
-    with open(FILE, "w") as f:
+    with open(FILEH, "w") as f:
         json.dump(users, f, indent=4)
 
 
