@@ -8,25 +8,20 @@ file_path = path + "/" + file
 with open(file_path, "r") as csv_file:
     text = csv_file.readlines()
 
-# Print alle regels
 print("Alle regels:")
 for row in text:
     print(row)
 
-# Lege list voor de gesplitste regels
 regels = []
 
-# Elke regel splitsen op komma
 for row in text:
     onderdelen = row.strip().split(',')
     regels.append(onderdelen)
 
-# Print het eerste deel van elke regel
 print("\nEerste deel van elke regel:")
 for row in regels:
     print(row[0])
 
-# Eerste regel, laatste regel en totaal aantal regels
 print("\nEerste regel:", regels[0])
 print("Laatste regel:", regels[-1])
 print("Totaal aantal regels:", len(regels))
